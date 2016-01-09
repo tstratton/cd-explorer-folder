@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #LINES=($(explorer_folders.exe))
 #LINES=($(cmd /c cde.exe))
@@ -9,12 +9,11 @@ list-explorer-folders.exe > $OUTFILE
 dos2unix.exe -q $OUTFILE
 LINES=($(cat $OUTFILE))
 
-
 ## replace space with %20, to avoid separate array elements
 DESKTOP=${USERPROFILE// /%20}/Desktop
 
 ## append to array after converting backslash to slash
-LINES=( ${LINES[@]-} $(echo "${DESKTOP//\\//}") )
+LINES=( ${LINES[@]-} "${DESKTOP//\\//}" )
 
 ## the size of array (or first unused index)
 #echo ${#LINES[@]} 
@@ -22,7 +21,7 @@ LINES=( ${LINES[@]-} $(echo "${DESKTOP//\\//}") )
 #echo $LINES
 
 COUNT=0
-if [ -z ${1}  ]; then
+if [ -z "$1" ]; then
 	for LINE in "${LINES[@]}"
 	do
 		## remove file:/// for local folders
@@ -44,5 +43,10 @@ else
 	LINE=${LINE//\%20/ }
 	echo $LINE
 	unset LINES
-	cd "$LINE"
+	LINE="$LINE"
+	if [ -d "$LINE" ]; then
+		cd "$LINE"
+	else
+		echo "Error! invalid directory name"
+	fi
 fi
