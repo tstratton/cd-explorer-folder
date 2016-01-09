@@ -3,8 +3,11 @@
 #LINES=($(explorer_folders.exe))
 #LINES=($(cmd /c cde.exe))
 
-explorer_folders.exe > ~/bin/cde-out.txt
-LINES=($(cat ~/bin/cde-out.txt))
+OUTFILE=~/bin/cde-out.txt
+
+list-explorer-folders.exe > $OUTFILE
+dos2unix.exe -q $OUTFILE
+LINES=($(cat $OUTFILE))
 
 
 ## replace space with %20, to avoid separate array elements
