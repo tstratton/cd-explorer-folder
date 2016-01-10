@@ -1,6 +1,5 @@
 # cd-explorer-folder
-simple cygwin command line utility to change to the folder an open explorer window.
-
+simple cygwin command line utility to list / change to the folder of an open file explorer window.
 
 ### Setup:
 
@@ -10,7 +9,7 @@ You need `AxImp.exe` from Microsoft to generate `SHDocVw.dll` and `AxSHDocVw.dll
 - run `make lib` to generate the dlls
 - run `make build` to generate the exe file
 - copy the dll files, the exe file, and the shell script to a folder such as `~/bin/`
-- add an alias such as `alias cdx='source ~/bin/cd_explorer.sh'`
+- source the `define_cdx.sh` shell script in your `.bashrc` or copy the function into your `.bashrc`
 
 ### Running:
 
